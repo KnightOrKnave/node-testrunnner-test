@@ -1,7 +1,12 @@
-import test, { describe, it } from 'node:test';
+import test, { mock, describe, it } from 'node:test';
 import assert from 'node:assert';
-import { targetFunc, targetValidationFunc } from './targetmodule.js';
-
+import * as vv from './targetRequiredModule.js';
+import * as luxon from 'luxon';
+import {
+  targetFunc,
+  targetRandomFunc,
+  targetValidationFunc,
+} from './targetmodule.js';
 test('first test', () => {
   const act = targetFunc();
   console.debug(act);
@@ -56,3 +61,26 @@ describe('multi loop testdescribe', () => {
     });
   }
 });
+
+//mockうごかない
+//mockテスト（自作モジュール）
+//describe('my mock test', (t) => {
+//  t.mock.method(vv, 'randomValue', () => {
+//    return 50;
+//  });
+//  it('case test', () => {
+//    const tg = targetRandomFunc();
+//    assert.strictEqual(tg, 'hoge');
+//  });
+//});
+
+//mockテスト（自作モジュール）
+//describe('my mock test2', (t) => {
+//  t.mock.method(luxon, 'toFormat', () => {
+//    return 'xxxxxxxxxxxxxx';
+//  });
+//  it('case test', () => {
+//    const acctual = targetFunc();
+//    console.log(acctual);
+//  });
+//});
