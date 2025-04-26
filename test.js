@@ -1,6 +1,6 @@
-import test from 'node:test';
+import test, { describe, it } from 'node:test';
 import assert from 'node:assert';
-import { targetFunc } from './targetmodule.js';
+import { targetFunc, targetValidationFunc } from './targetmodule.js';
 
 test('first test', () => {
   const act = targetFunc();
@@ -37,4 +37,22 @@ test.skip('compare json ng', () => {
   const acctual = targetFunc();
 
   assert.deepStrictEqual(expect, acctual);
+});
+
+//英字のみのバリデーションテスト
+describe('multi loop testdescribe', () => {
+  let cases = [
+    ['a', true],
+    ['aaaaaaaa', true],
+    ['abc123', false],
+    ['abc-xyz', false],
+    ['', false],
+  ];
+
+  for (const [input, expResult] of cases) {
+    it(`case ${input} should ${expResult}`, () => {
+      const actRes = targetValidationFunc(input);
+      assert.strictEqual(actRes, expResult);
+    });
+  }
 });

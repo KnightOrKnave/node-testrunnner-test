@@ -8,3 +8,8 @@ export const targetFunc = () => {
     reqTime: t.toFormat('yyyy/MM/dd HH:mm:ss'),
   };
 };
+
+export const targetValidationFunc = (input) => {
+  const isValid = /^[a-zA-Z]+$/.test(input);
+  return isValid;
+};
